@@ -22,3 +22,222 @@
 ![화면 기록 2024-02-23 13 34 15](https://github.com/Gugoon/MacGeminiAI/assets/10485667/1d836d1a-dde6-43f9-bdad-cbdb952c3cb6)
 
 ![화면 기록 2024-02-23 13 39 15](https://github.com/Gugoon/MacGeminiAI/assets/10485667/b0c2457f-bdfd-4794-bebc-87da86ad3868)
+
+
+# 주요 기술 및 코드
+- SwiftUI, SwiftData, MVVM
+- GoogleGenerativeAI
+
+
+```swift
+
+//: ## SwiftData
+
+@Model
+final class HistroyItemData{
+    var id : String
+    @Relationship(deleteRule : .cascade, inverse: \HistoryChatData.item)
+    var chatData: [HistoryChatData]? = []
+    
+    init(id: String) {
+        self.id = id
+    }
+}
+
+@Model
+final class HistoryChatData{
+    var id : String
+    var message: String
+    var participant: String
+    var item : HistroyItemData?
+    
+    init(id: String, message: String, participant: String, item: HistroyItemData?) {
+        self.id = id
+        self.message = message
+        self.participant = participant
+        self.item = item
+    }
+}
+
+```
+
+```swift
+
+//: ## View
+
+struct HistoryView : View{
+    //..생략
+    @Query(sort: \HistroyItemData.id, order: .forward) 
+        private var historyItems: [HistroyItemData]
+    @StateObject var conversationViewModel: ConversationViewModel
+    @StateObject var historyDataViewModel: HistoryDataViewModel
+    
+    @Environment(\.modelContext) private var context
+    //..생략
+
+    List(historyDataViewModel.historyItem) { historyItem in
+                if let historyChatData = historyItem.chatData, let chatFirstMessage = historyChatData.first?.message {
+                    HStack{
+                        Text(chatFirstMessage)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                var modelContent : [ModelContent] = []
+                                for chatData in historyChatData{
+                                    modelContent.append(ModelContent(role: chatData.participant == "user" ?  "user" : "model" , parts: chatData.message))
+                                }
+                                conversationViewModel.startRelayChat(history: modelContent)
+                            }
+                            .foregroundColor(.orange)
+                            .lineLimit(3)
+                        
+                        Text("❎")
+                            .onTapGesture {
+                                context.delete(historyItem)
+                            }
+                            .padding(6)
+                    }//: HSTACK
+                }
+                
+            }//: LIST
+            .background(.gray)
+    //..생략            
+    
+    private func deleteItem(historyItem: HistroyItemData) {
+        context.delete(historyItem)
+        do {
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+
+    //..생략
+}
+```
+
+
+```swift
+
+//: ## ViewModel
+
+import GoogleGenerativeAI
+import SwiftUI
+
+@MainActor
+class ConversationViewModel: ObservableObject {
+    @Published var messages = [ChatMessageData]()
+    @Published var isBusy = false
+    
+    @Published var error: Error?
+    var hasError: Bool {
+        return error != nil
+    }
+
+    //..생략
+
+    private var model: GenerativeModel
+    private var chat: Chat
+    private var stopGenerating = false
+    
+    private var chatTask: Task<Void, Never>?
+
+    
+    init() {
+        model = GenerativeModel(name: "gemini-pro", apiKey: APIKey.default)
+        chat = model.startChat()
+    }
+    
+
+    func startNewChat() {
+        stop()
+        error = nil
+        chat = model.startChat()
+        messages.removeAll()
+        ..생략    
+    }
+
+    func sendMessage(_ text: String, streaming: Bool = true, images : [NSImage]? = nil) async {
+        error = nil
+        
+        if ((images?.isEmpty) != nil){
+            await internalSendMessageWithImage(text, selectedImage: images!)
+        }else{
+            if streaming {
+                await internalSendMessageStreaming(text)
+            } else {
+                await internalSendMessage(text)
+            }
+        }
+    }
+
+    //..생략    
+    
+    func stop() {
+        chatTask?.cancel()
+        error = nil
+    }
+
+    //..생략    
+
+    private func internalSendMessage(_ text: String) async {
+        chatTask?.cancel()
+        
+        chatTask = Task {
+            isBusy = true
+            defer {
+                isBusy = false
+            }
+            
+            let userMessage = ChatMessageData(message: text, participant: .user)
+            messages.append(userMessage)
+            
+            let systemMessage = ChatMessageData.pending(participant: .system)
+            messages.append(systemMessage)
+            
+            do {
+                var response: GenerateContentResponse?
+                response = try await chat.sendMessage(text)
+                
+                
+                if let responseText = response?.text {
+                    messages[messages.count - 1].message = responseText
+                    messages[messages.count - 1].pending = false
+                }
+                
+            } catch {
+                self.error = error
+                print(error.localizedDescription)
+                messages.removeLast()
+            }
+        }
+    }
+    //..생략    
+}
+
+```
+
+
+
+```swift
+
+//: ## Model
+
+enum Participant {
+    case system
+    case user
+}
+
+struct ChatMessageData: Identifiable, Equatable{
+    let id = "\(Date().timeIntervalSince1970)"
+    var message: String
+    let participant: Participant
+    var pending = false
+    var selectedImage = [NSImage]()
+    
+    static func pending(participant: Participant) -> ChatMessageData {
+        Self(message: "", participant: participant, pending: true)
+    }
+}
+
+```
