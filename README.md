@@ -241,3 +241,7 @@ struct ChatMessageData: Identifiable, Equatable{
 }
 
 ```
+
+<span style="color:orange">
+- 참고 자료 : https://ai.google.dev
+</span>
