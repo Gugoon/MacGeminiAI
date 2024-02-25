@@ -15,6 +15,9 @@
 
 &nbsp;
 
+다운로드 :  [GeminiAI.app.zip](https://github.com/Gugoon/MacGeminiAI/files/14394832/GeminiAI.app.zip)
+
+&nbsp;
 # 실행 화면
 
 ![화면 기록 2024-02-23 13 28 31](https://github.com/Gugoon/MacGeminiAI/assets/10485667/6d069c28-df0f-4828-946d-c30696cdc7e8)
