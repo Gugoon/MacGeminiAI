@@ -15,7 +15,7 @@
 
 &nbsp;
 
-다운로드 :  [GeminiAI.app.zip](https://github.com/Gugoon/AIGemini/files/14398646/GeminiAI.app.zip)
+다운로드 :  [GeminiAI.app.zip](https://github.com/Gugoon/MacGeminiAI/files/14398703/GeminiAI.app.zip)
 
 &nbsp;
 # 실행 화면
