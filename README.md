@@ -24,6 +24,8 @@
 
 <img width="470" alt="스크린샷 2024-02-26 10 45 18" src="https://github.com/Gugoon/MacGeminiAI/assets/10485667/0f75ac46-c1d1-4378-a154-980fb586971a">
 
+&nbsp;
+
 <span style="color:orange">
 "그래도 열기" 선택 
 </span>
