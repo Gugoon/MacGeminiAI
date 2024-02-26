@@ -17,6 +17,17 @@
 
 다운로드 :  [GeminiAI.app.zip](https://github.com/Gugoon/MacGeminiAI/files/14398703/GeminiAI.app.zip)
 
+[앱 실행 이슈]
+&nbsp;
+
+설정 -> 개인정보 보호 및 보안 -> '보안'다음에서 다운로드한 응용 프로그램 허용 -> 하단
+
+<img width="470" alt="스크린샷 2024-02-26 10 45 18" src="https://github.com/Gugoon/MacGeminiAI/assets/10485667/0f75ac46-c1d1-4378-a154-980fb586971a">
+
+<span style="color:orange">
+"그래도 열기" 선택 
+</span>
+
 &nbsp;
 # 실행 화면
 
