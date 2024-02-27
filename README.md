@@ -15,7 +15,7 @@
 
 &nbsp;
 
-다운로드 :  [GeminiAI.app.zip](https://github.com/Gugoon/MacGeminiAI/files/14398703/GeminiAI.app.zip)
+다운로드 :  [GeminiAI.app.zip](https://github.com/Gugoon/MacGeminiAI/files/14413038/GeminiAI.app.zip)
 
 [앱 실행 이슈]
 &nbsp;
@@ -33,12 +33,11 @@
 &nbsp;
 # 실행 화면
 
-![화면 기록 2024-02-23 13 28 31](https://github.com/Gugoon/MacGeminiAI/assets/10485667/6d069c28-df0f-4828-946d-c30696cdc7e8)
+![화면 기록 2024-02-27 09 52 04](https://github.com/Gugoon/MacGeminiAI/assets/10485667/cb0fa287-6015-4871-9508-20c5d19b163c)
 
-![화면 기록 2024-02-23 13 34 15](https://github.com/Gugoon/MacGeminiAI/assets/10485667/1d836d1a-dde6-43f9-bdad-cbdb952c3cb6)
+![화면 기록 2024-02-27 09 53 23](https://github.com/Gugoon/MacGeminiAI/assets/10485667/84ce8a23-9bea-4530-b05c-d77826be4655)
 
-![화면 기록 2024-02-23 13 39 15](https://github.com/Gugoon/MacGeminiAI/assets/10485667/b0c2457f-bdfd-4794-bebc-87da86ad3868)
-
+![화면 기록 2024-02-27 09 54 04](https://github.com/Gugoon/MacGeminiAI/assets/10485667/fe72eac2-ad26-447c-9824-635440ffa94c)
 
 # 주요 기술 및 코드
 - SwiftUI, SwiftData, MVVM
