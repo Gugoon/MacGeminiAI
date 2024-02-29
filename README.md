@@ -1,8 +1,8 @@
-# MacGeminiAI
+# GeminiAI (Mac/iOS)
 
 &nbsp;
 
-# 주요 기능 및 특징
+# 주요 기능 및 특징 (Mac Version)
 <span style="color:orange">
 사용자가 자연어로 질문하고 명령을 내릴 수 있는 채팅형 AI 앱
 
@@ -257,6 +257,34 @@ struct ChatMessageData: Identifiable, Equatable{
 
 ```
 
+&nbsp;
+
+# 주요 기능 및 특징 (iOS Version)
+
+### 사용자가 자연어로 질문하고 명령을 내릴 수 있는 채팅형 AI 앱 
+
+### Mac 버전과 동일한 DataModel, ViewModel, SwiftData
+
+
+
+
+1. 키보드입력 또는 음성인식(Speech To Text)으로 채팅 가능
+2. 겔러리에 접근 ImageFile 업로드 (Image Picker)
+3. 채팅 Message MarkDown 형식 지원
+4. 채팅 히스토리 저장 및 열람
+5. 흔들어서 채팅 초기화
+
+&nbsp;
+# 실행 화면
+![IMG_2850](https://github.com/Gugoon/MacGeminiAI/assets/10485667/f9fff0d7-37f2-4eb7-bf53-55ef66177f97)
+![IMG_2849](https://github.com/Gugoon/MacGeminiAI/assets/10485667/7037b095-1dbc-4041-90d2-454912aa80b3)
+![IMG_2847](https://github.com/Gugoon/MacGeminiAI/assets/10485667/a72a1b12-4995-4852-b644-00833a520a66)
+![IMG_2846](https://github.com/Gugoon/MacGeminiAI/assets/10485667/ab67a87c-d42e-4038-bd99-26430b9bee32)
+![IMG_2845](https://github.com/Gugoon/MacGeminiAI/assets/10485667/bd990df5-73b0-45b4-bdfd-9a79b6dd44b9)
+
+
+
 <span style="color:orange">
 - 참고 자료 : https://ai.google.dev
 </span>
+
